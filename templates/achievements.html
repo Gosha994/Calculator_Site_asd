@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mt-4">
+    <h1>Наши достижения</h1>
+    <p class="lead">Чем мы гордимся за время работы</p>
+    
+    <div class="row mt-4">
+        {% for achievement in achievements %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 achievement-card">
+                <div class="card-body text-center">
+                    <div class="display-1 mb-3">{{ achievement.icon }}</div>
+                    <h3 class="card-title">{{ achievement.title }}</h3>
+                    <p class="card-text">{{ achievement.description }}</p>
+                    <span class="badge bg-success">{{ achievement.year }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="text-center mt-4">
+        <p>И это только начало! Впереди много новых достижений!</p>
+    </div>
+</div>
+{% endblock %}

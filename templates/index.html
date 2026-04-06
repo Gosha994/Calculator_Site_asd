@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" class="mb-4" style="max-width: 300px;">
+    <h1 class="display-4">Добро пожаловать на наш сайт!</h1>
+    <p class="lead">Мы создаем удивительные вещи и рады видеть вас здесь.</p>
+
+    <div class="row mt-5">
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Описание проекта</h5>
+                    <p class="card-text">Узнайте больше о том, чем мы занимаемся и какие цели преследуем.</p>
+                    <a href="/about" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Разработчики</h5>
+                    <p class="card-text">Познакомьтесь с командой, которая создает этот проект.</p>
+                    <a href="/developers" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Обратная связь</h5>
+                    <p class="card-text">Оставьте свои вопросы и предложения через форму обратной связи.</p>
+                    <a href="/feedback" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Наши достижения</h5>
+                    <p class="card-text">Посмотрите, чего мы достигли за время работы.</p>
+                    <a href="/achievements" class="btn btn-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Поддержать проект</h5>
+                    <p class="card-text">Поддержите нас и увидите праздничный салют!</p>
+                    <a href="/support" class="btn btn-success">Поддержать</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

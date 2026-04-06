@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mt-4">
+    <h1>О проекте</h1>
+    <div class="row">
+        <div class="col-md-8">
+            <p class="lead">Набор обучающих мини-игр для школьников начального, основного и среднего образования.</p>
+
+            <h3 class="mt-4">Достоинства продукта:</h3>
+            <ul>
+                <li>Методологически грамотно разработанные игры</li>
+                <li>Механика игры, зависящая от количества и качества решенных задач</li>
+                <li>Смещение внимания с деструктивного контента на образовательный</li>
+            </ul>
+
+            <h3 class="mt-4">Недостатки</h3>
+            <ul>
+                <li>Работает только на ПК</li>
+            </ul>
+
+
+            <h3 class="mt-4">Используемые технологии</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Вспомогательные библиотеки:</h5>
+                            <ul>
+                                <li>math – для обработки сложных математических операций</li>
+                                <li>sys – для работы со строками и информацией</li>
+                                <li>random – для генерации и получения случайных чисел</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Ядро</h5>
+                            <ul>
+                                <li>PyQt6 – Главное меню</li>
+                                <li>Arcade – Основной движок игры </li>
+                                <li>Гибрид Arcade physic engine и кастомного движка – используется для улучшенной обработки физики объектов</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Дополнительные решения:</h5>
+                            <p class="card-text">Файл TitleBar – самописный метод для кастомного тайтл-бара приложения.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Инновации</h5>
+                            <p class="card-text">Мы следим за новыми технологиями и применяем их.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Статистика проекта</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">📅 Основан: 2025 год</li>
+                        <li class="list-group-item">👥 Разработчики: 3</li>
+                        <li class="list-group-item">📚 Проект - перспективный</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mt-4">
+    <h1>Наши разработчики</h1>
+    <p class="lead">Познакомьтесь с командой, которая делает этот проект возможным</p>
+    
+    <div class="row mt-4">
+        {% for dev in developers %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 developer-card">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                        {% if dev.avatar_url %}
+                            <img src="{{ dev.avatar_url }}" class="developer-photo img-fluid rounded-circle" alt="{{ dev.name }}">
+                        {% else %}
+                            <div class="developer-placeholder rounded-circle d-flex align-items-center justify-content-center bg-light">
+                                <i class="bi bi-person-fill" style="font-size: 3rem; color: #6c757d;"></i>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ dev.name }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ dev.role }}</h6>
+                            <p class="card-text">{{ dev.bio }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+</div>
+{% endblock %}

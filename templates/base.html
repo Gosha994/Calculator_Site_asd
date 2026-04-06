@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>{{ title }}</title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип" height="40" class="me-2">
+                <span class="fw-bold">Калькулятор - сайт</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'about' %}active{% endif %}" href="/about">
+                            <i class="bi bi-info-circle"></i> Описание
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'developers' %}active{% endif %}"
+                           href="/developers">
+                            <i class="bi bi-people"></i> Разработчики
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'feedback' %}active{% endif %}" href="/feedback">
+                            <i class="bi bi-envelope"></i> Обратная связь
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'achievements' %}active{% endif %}"
+                           href="/achievements">
+                            <i class="bi bi-trophy"></i> Достижения
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'support' %}active{% endif %}" href="/support">
+                            <i class="bi bi-heart"></i> Поддержать
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center">
+                    {% if current_user.is_authenticated %}
+                    <div class="d-flex align-items-center auth-block">
+                                <span class="navbar-text me-3 user-name">
+                                    <i class="bi bi-person-circle"></i>
+                                    <span class="d-none d-md-inline">{{ current_user.name }}</span>
+                                </span>
+                        <a class="btn btn-outline-danger btn-md-custom" href="/logout">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span class="d-none d-md-inline">Выйти</span>
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="d-flex gap-3 auth-buttons">
+                        <a class="btn btn-outline-primary btn-md-custom" href="/login">
+                            <i class="bi bi-box-arrow-in-right"></i>
+                            <span class="d-none d-md-inline">Войти</span>
+                        </a>
+                        <a class="btn btn-primary btn-md-custom" href="/register">
+                            <i class="bi bi-person-plus"></i>
+                            <span class="d-none d-md-inline">Регистрация</span>
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main role="main" class="container mt-4">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        <i class="bi bi-{% if category == 'success' %}check-circle{% elif category == 'error' %}exclamation-circle{% else %}info-circle{% endif %}"></i>
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="footer mt-auto py-3 bg-light">
+    <div class="container text-center">
+            <span class="text-muted">
+                <i class="bi bi-c-circle"></i> 2026 Мой Сайт. Все права защищены.
+            </span>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+
+{% block scripts %}{% endblock %}
+</body>
+</html>

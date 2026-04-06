@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center mt-5 support-page">
+    <h1>Поддержать проект</h1>
+    <p class="lead">Ваша поддержка помогает нам становиться лучше!</p>
+    
+    <div class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Выберите способ поддержки</h5>
+                    
+                    <div class="d-grid gap-3 mt-4">
+                        <button class="btn btn-outline-primary btn-lg" onclick="showFireworks(100)">⭐ 100 ₽</button>
+                        <button class="btn btn-outline-success btn-lg" onclick="showFireworks(500)">🌟 500 ₽</button>
+                        <button class="btn btn-outline-warning btn-lg" onclick="showFireworks(1000)">✨ 1000 ₽</button>
+                        <button class="btn btn-outline-danger btn-lg" onclick="showFireworks(5000)">💫 5000 ₽</button>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <p>Или укажите свою сумму:</p>
+                        <div class="input-group mb-3">
+                            <input type="number" id="customAmount" class="form-control" placeholder="Сумма в рублях" min="10">
+                            <button class="btn btn-primary" onclick="showFireworks(document.getElementById('customAmount').value)">Поддержать</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="fireworksContainer" class="mt-4" style="display: none;">
+        <canvas id="fireworksCanvas"></canvas>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function showFireworks(amount) {
+    if (!amount || amount < 10) {
+        alert('Пожалуйста, укажите сумму от 10 ₽');
+        return;
+    }
+    
+    fetch('/api/fireworks')
+        .then(response => response.json())
+        .then(data => {
+            alert(`Спасибо за поддержку в размере ${amount} ₽! ${data.message}`);
+            startFireworks(data.colors);
+        });
+}
+
+function startFireworks(colors) {
+    const container = document.getElementById('fireworksContainer');
+    container.style.display = 'block';
+    
+    const canvas = document.getElementById('fireworksCanvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const ctx = canvas.getContext('2d');
+    const particles = [];
+    
+    for (let i = 0; i < 100; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 10,
+            vy: (Math.random() - 0.5) * 10,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            life: 1.0
+        });
+    }
+    
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
+            
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.1;
+            p.life -= 0.01;
+            
+            ctx.globalAlpha = p.life;
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 5, 0, Math.PI * 2);
+            ctx.fill();
+            
+            if (p.life <= 0 || p.y > canvas.height) {
+                particles.splice(i, 1);
+            }
+        }
+        
+        if (particles.length > 0) {
+            requestAnimationFrame(animate);
+        } else {
+            container.style.display = 'none';
+        }
+    }
+    
+    animate();
+}
+</script>
+{% endblock %}
