@@ -205,7 +205,7 @@ def main():
     db_session.global_init(db_path)
 
     # Запуск приложения
-    app.run(port=1007, host='127.0.0.1', debug=True)
+    app.run(port=1007, host='0.0.0.0', debug=True)
 
 
 if __name__ == '__main__':
